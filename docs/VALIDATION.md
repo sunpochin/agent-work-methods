@@ -24,3 +24,5 @@ These are maintainer walkthroughs, not independent agent runs. Tests establish p
 ## Issue #3 selection research
 
 [The comparison](TOOL_EVALUATION.md) records official documents and pinned source instructions read on 2026-11-03. It distinguishes those observations from pending synthetic and product trials. No candidate was installed or executed, no worker was launched, and no new helper is part of this deliverable. Workspace preservation, attempt ownership, recovery, evidence freshness and productivity remain unverified for the candidate workflows. The negative-scenario table is a test plan, not a passing test report. Existing repository checks do not close those gaps.
+
+The expanded comparison includes BMad Method's official workflow and customization description, not an audit of its installer or a measured fit for either product. No recurring gap has been demonstrated to require custom code or an AWM adapter. Trial results may support direct adoption, configuration only, a small supplement, or no change; adding a shared layer is not an acceptance criterion.

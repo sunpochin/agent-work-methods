@@ -32,7 +32,7 @@ Read [adoption and updates](docs/ADOPTION.md), [design decisions](TECHNICAL.md),
 
 ## 後續選型研究
 
-新增共用工具前，先比較現有 Codex 工作流程與 Superpowers，並以小任務驗證缺口。見 [現成方案比較與差距驗證計畫](docs/TOOL_EVALUATION.md)。目前只有文件與來源核對，尚未安裝、試用或選定新方案；既有五個 skills 不受影響。
+先評估現成流程如何容納既有專案規則，再以小任務驗證採用可行性；結果可以是直接採用、只需設定、少量補充或維持現狀，並不要求新增 AWM 流程或 Adapter。見 [現成流程比較與採用驗證計畫](docs/TOOL_EVALUATION.md)。目前只有文件與來源核對，尚未安裝、試用或選定新方案；既有五個 skills 不受影響。
 
 ## 維護與驗證 / Maintenance
 
