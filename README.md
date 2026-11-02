@@ -30,6 +30,10 @@ These skills supply methods, not project authority. They do not select your fram
 
 Read [adoption and updates](docs/ADOPTION.md), [design decisions](TECHNICAL.md), and [validation and limits](docs/VALIDATION.md). Format follows the [Agent Skills specification](https://agentskills.io/specification); structural compatibility does not establish integration with every client.
 
+## 後續選型研究
+
+新增共用工具前，先比較現有 Codex 工作流程與 Superpowers，並以小任務驗證缺口。見 [現成方案比較與差距驗證計畫](docs/TOOL_EVALUATION.md)。目前只有文件與來源核對，尚未安裝、試用或選定新方案；既有五個 skills 不受影響。
+
 ## 維護與驗證 / Maintenance
 
 Python 3.10 or later runs repository checks without additional packages; Python is not needed just to read or copy a skill.

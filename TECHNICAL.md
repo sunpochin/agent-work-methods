@@ -27,3 +27,13 @@ Tests copy individual skills into unrelated synthetic layouts. Negative cases re
 - Live shared rules or cross-repository links create external-state dependencies. Complete pinned copies preserve independent operation.
 - An installer/synchronizer needs more permissions and conflict handling than this version requires. Adoption uses explicit copies and reviewed updates.
 - A universal constitution turns local choices into rules for strangers. This collection is a selectable library of methods.
+
+## Evaluate existing capabilities before adding a runtime
+
+Issue #3 now starts with [tool selection and gap verification](docs/TOOL_EVALUATION.md). Native Codex workflows are the baseline; Superpowers is the first method-layer candidate. Other products are evaluated when an observed need justifies their additional setup. This is a research decision, not adoption or a claim of compatibility.
+
+The earlier assumption that a custom task schema and workspace checker must be delivered is withdrawn. No executable helper or new skill is included in this change. Prefer existing configuration, checks and small adapters; require a reproducible unmet need before proposing code. Shared guidance cannot replace a consumer's policy or establish merge authority.
+
+AWM owns the shared work contract, selected-tool adoption mapping, and compatibility cases for adoption or upgrades. The four external options are candidates, not an integration checklist. Keep one authoritative task record and dispatch owner. Adapter describes the mapping; Strategy is relevant only when execution choices are needed, and a Facade only when scattered operations become an observed problem. These patterns do not require code. Extract shared adapter code only after a second actual integration demonstrates duplication; a proven one-tool gap may justify a narrow patch instead. Reproducible upstream gaps should be documented before extending local tooling.
+
+Source inspection identifies candidate conflicts around setup, fallback isolation, recovery, cleanup and tool interfaces. Synthetic trials and one authorized small task per consumer remain unperformed. Package checks only validate this repository's documentation and existing bundle; they do not validate external tools. Reviewed source/version records and trial findings can be sufficient deliverables without a new framework.

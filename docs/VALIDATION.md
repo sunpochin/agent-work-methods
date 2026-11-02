@@ -20,3 +20,7 @@ Checks cover frontmatter, required files, independent links, individual copies i
 | Formatter imports code that searches environment files and uploads output | Read imports without execution; do not infer secret/upload permission | Review separates completeness, behavior, fit and authority |
 
 These are maintainer walkthroughs, not independent agent runs. Tests establish package behavior; they do not establish adherence, productivity gains, security certification, cross-client integration, device behavior or human acceptance. Exact commands, commit and CI results are recorded in the publication PR. Consumer-project adoption remains unverified until performed there.
+
+## Issue #3 selection research
+
+[The comparison](TOOL_EVALUATION.md) records official documents and pinned source instructions read on 2026-11-03. It distinguishes those observations from pending synthetic and product trials. No candidate was installed or executed, no worker was launched, and no new helper is part of this deliverable. Workspace preservation, attempt ownership, recovery, evidence freshness and productivity remain unverified for the candidate workflows. The negative-scenario table is a test plan, not a passing test report. Existing repository checks do not close those gaps.

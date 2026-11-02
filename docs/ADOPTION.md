@@ -34,3 +34,7 @@ Point the agent to actual project instructions, commands, data boundaries, failu
 Compare the adopted commit with the candidate. Review instructions, references, licenses and any new executable content; this first version has no executable skill helpers. Preserve local adaptations and resolve conflicts explicitly. Update the complete selected skill and its source record together through the consuming project's workflow.
 
 Publication does not install or update either source product. Each can adopt a reviewed version separately.
+
+## Evaluate additional workflows separately
+
+For proposed orchestration or refactoring capabilities, use the [existing-tool comparison and trial plan](TOOL_EVALUATION.md) before choosing an implementation. Start with the host's existing workflow; compare additional methods against actual local rules and observed costs. This research is not an installation instruction or a selected dependency. Record the installed App/CLI/plugin version separately from a source commit inspected on GitHub. Product trials and changes to global configuration require their own scope and authorization.
