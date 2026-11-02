@@ -1,11 +1,23 @@
 <!-- 檔案用途：先比較現成方案，再以可重跑證據決定是否補工具。所在層：選型研究與試用計畫，非安裝規則。主要關聯：ADOPTION.md、VALIDATION.md、../TECHNICAL.md。 -->
 # 評估現成流程並驗證兩產品採用可行性
 
-規劃、拆任務、執行、測試、審查與交接已有現成流程。此階段以既有 Codex 工作方式作比較基準，評估 Superpowers、BMad Method 與 Spec Kit 如何容納既有 AGENTS.md、測試與 PR 規則，再選一套作小規模試用。產品有自己的規則，只能推導出需要核對設定與驗收，不能直接推導成需要新流程、共用契約或 Adapter。
+規劃、拆任務、執行、測試、審查與交接已有現成流程。像先比較三本工作手冊，再挑一本用小作業試試看；專案原本的規矩仍算數。此階段以既有 Codex 工作方式作基準，比較 Superpowers、BMad Method 與 Spec Kit 如何容納既有 AGENTS.md、測試與 PR 規則。產品有自己的規則，只能推導出需要核對設定與驗收，不能直接推導成需要新流程、共用契約或 Adapter。
 
-**2026-11-03 狀態：官方文件與來源文字已查閱；安裝、合成情境執行、產品試用、效益及相容性均未驗證。** 本文件是候選研究與差距驗證計畫，不是採用決議或完成的實驗報告。既有五個 skills 與 v0.1.0 套件不變；先前的本機核對工具草稿未納入交付、未驗證，也不作預定成果。
+**2026-11-03（Asia/Taipei）狀態：固定 release 的來源比較已完成，暫建議優先小規模試用 Spec Kit v1.2.6 的官方 Lean preset；候選均未安裝或執行，效益與相容性未驗證。** 另有獨立 clone＋submodule 的合成證據，範圍與未合併狀態見下文；它不是候選試驗。本文件不是正式採用決議。既有五個 skills 與 v0.1.0 套件不變；先前未驗證的自建草稿不納入交付或預定成果。
 
 本文件對應 [共用主票 #3](https://github.com/sunpochin/agent-work-methods/issues/3)；產品試用分別由 [Dance Stamp #246](https://github.com/sunpochin/dance-stamp/issues/246) 與 [jia-jian-log #1399](https://github.com/sunpochin/jia-jian-log/issues/1399) 追蹤。這些關聯是維護計畫，不會安裝到個別 skill 或成為其他專案的政策。
+
+## 暫定建議與未選其他方案的原因
+
+**先試官方 Lean，保留既有工作區、測試、push、PR 與審查入口。** 理由是該版已有精簡的 spec → plan → tasks → implement 檔案流程，Git 管理與 agent-context 同步又是選用擴充，靜態看來需改動的既有流程較少。這是根據下列來源的推論，不是已測試相容、必然較好或已獲准安裝。constitution 應引用各產品 AGENTS.md 作權威，不抄出第二份競爭政策。實際小任務、工時／費用預算與停止條件仍待各產品另定與授權。
+
+| 候選 | 本輪試用順序與取捨 |
+| --- | --- |
+| **Spec Kit v1.2.6／官方 Lean** | 優先提議一項單線小任務。額外 `spec.md`／`plan.md`／`tasks.md` 與 feature 指標仍有維護成本；若不能減少接手、返工或審查負擔，維持現狀即可。 |
+| **Superpowers v7.0.1** | 暫緩優先試用。已有本地指示優先與同 session 執行路徑，但依賴安裝、隔離失敗回退、最終 reviewer 及暫存清理預設需逐一對應產品限制；不能只切 inline 就宣稱符合單線／保全要求。 |
+| **BMad Method v6.12.4** | 暫緩優先試用。現成覆寫較完整，適合另有完整規格／審查需求時再考慮；目前 default full／oneshot 的派工、審查與 no-push 行為需處理，尚無證據顯示其設定及文件成本值得。 |
+
+Conductor／Agent Orchestrator 不在本輪優先三者，也不是必裝配件；只有實測顯示另需協作介面或調度才重開評估。本次沒有重新審它們的完整來源。既有 Codex 工作方式只作基準，本輪未測用戶端工作區／Handoff 功能。
 
 ## 不預設 AWM 必須新增一層
 
@@ -22,43 +34,86 @@ AWM 可能只需保存選型結果、實際固定版本與少量專案補充，�
 
 Adapter、Strategy、Facade 都不是本票預定架構或完成條件。即使第二個工具需要使用、出現相似設定，也不足以直接證明要抽共用程式。先能設定就設定，適合由上游解決就整理可重現回報；只有反覆發生且確實無法解決的缺口才考慮少量自建。本輪未向上游發文。
 
-## 候選與已知範圍
+## 固定來源與證據分層
 
-以下「文件／來源」表示可追溯的描述或指示，**不表示執行成功**。「待驗」也不等於工具不支援。
+2026-11-03 已從官方 GitHub tag 物件解參照至下列 commit；只把來源當研究資料，未執行其中指令。release／commit 是閱讀基準，**不是實際安裝版本**；之後另記 App／CLI／plugin、設定及環境，不以 marketplace 或移動中的 main 代替固定來源。
 
-| 候選 | 文件／來源可確認的範圍 | 待驗問題 | 本輪定位 |
-| --- | --- | --- | --- |
-| Codex 原生工作流程 | 獨立 worktree、選擇起點、Local／Worktree Handoff、分支與 PR 操作；見 [官方 Worktrees](https://learn.chatgpt.com/docs/environments/git-worktrees) | 實際客戶端版本下的指定分支、未提交／ignored 檔案保全、交接、受測與受審版本記錄 | 優先作現有基準，先不增加另一套工作區管理 |
-| Superpowers | 設計／計畫、工作區選擇、逐任務執行與審查、進度 ledger 與恢復指示；見 [固定來源 README](https://github.com/obra/superpowers/blob/2ce8aa15d05bd57213e6f746f953aafb7ded7a8b/README.md) 與下表 | 本地規則優先是否在實際執行中成立；安裝、重試、審查與清理是否遵守邊界；增加的設定與審查成本 | 優先比較的方法層候選，可與 Codex 配合，尚未選定採用 |
-| BMad Method | [官方 Method](https://bmadcode.com/method) 描述分析、規劃、實作、驗證，以 repo 文件交接、追溯決策／需求／測試，並提供模組與團隊／個人覆寫 | 既有指示與覆寫優先順序、PR／檢查規則是否能直接設定；文件負擔與升級後行為 | 納入流程候選；本輪只核對官方描述，未審完整安裝鏈或執行 |
-| GitHub Spec Kit | 原則、規格、計畫、任務、一致性檢查、實作與收斂；見 [官方 Agentic SDD](https://github.github.com/spec-kit/reference/agentic-sdd.html) | 現有 AGENTS.md 與 constitution 的責任對應；工具既有範本／設定能否容納本地工作方式 | 納入完整流程比較；不把規格工具當工作區鎖 |
-| Conductor | 每項工作可有獨立 worktree／分支／聊天／終端，提供連接埠範圍、diff 與 checks／PR 介面；見 [官方 Codex 並行指南](https://www.conductor.build/docs/guides/parallel-agents/run-multiple-codex-sessions) | setup scripts、Files to copy、資源隔離與清理是否符合政策；介面收益是否值得額外設定 | 需要更多協作介面時再評估；文件明示工作區隔離不是安全邊界 |
-| Agent Orchestrator | 描述按工作區啟動 Agent、將 CI／review／衝突回交 worker；[固定 README](https://github.com/OrchestratorInc/agent-orchestrator/blob/25bc9b148f76438a117b930608a4a19d60e32fab/README.md) 與 [架構文件](https://github.com/OrchestratorInc/agent-orchestrator/blob/25bc9b148f76438a117b930608a4a19d60e32fab/docs/architecture.md) 涵蓋常駐程序與持久化狀態 | 自動重試、恢復、權限、服務成本、停止與資料邊界；本輪未審完整執行鏈 | 只有實測證明需要調度時另評估，初期不啟用常駐服務 |
+| 方案 | 官方 release | 本輪來源 commit |
+| --- | --- | --- |
+| Superpowers | [v7.0.1](https://github.com/obra/superpowers/releases/tag/v7.0.1) | [`2ce8aa15d05bd57213e6f746f953aafb7ded7a8b`](https://github.com/obra/superpowers/tree/2ce8aa15d05bd57213e6f746f953aafb7ded7a8b) |
+| BMad Method | [v6.12.4](https://github.com/bmad-code-org/BMAD-METHOD/releases/tag/v6.12.4) | [`bab9082c3e884e0d72c759bcd1a6d90bcc01be84`](https://github.com/bmad-code-org/BMAD-METHOD/tree/bab9082c3e884e0d72c759bcd1a6d90bcc01be84) |
+| GitHub Spec Kit | [v1.2.6](https://github.com/github/spec-kit/releases/tag/v1.2.6) | [`9eacc24ffe47eadf035a3af601e4dabfb15b8fde`](https://github.com/github/spec-kit/tree/9eacc24ffe47eadf035a3af601e4dabfb15b8fde) |
 
-這些方案所處層次不同，不能只用功能數量排總分，也不能據此推定需要搭配。若確實選用多個元件，先劃清責任；同一任務不得同時由兩套流程派工或維護互相競爭的狀態。
+四類證據分開：**靜態指示**只證明來源要求什麼；**可用設定**只證明有該覆寫入口；**執行證據**須有實際受測版本、環境與結果；**未驗證**不得由前三類外推。「AGENTS.md 優先」不是遵守規則的實證，文件沒提也不代表不支援。以下只查相關流程片段，沒有完整審完安裝、更新、hooks、scripts 或 imports；獲准安裝前仍須按產品既有外部工具流程檢查。
 
-## 優先候選的具體核對點
+### Superpowers：本地優先有文字依據，inline 仍有收尾要求
 
-Superpowers 的來源固定在 `2ce8aa15d05bd57213e6f746f953aafb7ded7a8b`，是本次閱讀版本，不是已測試或已安裝版本。Agent Orchestrator 同理，固定在 `25bc9b148f76438a117b930608a4a19d60e32fab`。官方網站為 2026-11-03 閱讀的可變文件；試用時另記錄實際 App／CLI／plugin 版本與設定，不推定 marketplace 套件等於 repo HEAD。
+- [using-superpowers](https://github.com/obra/superpowers/blob/2ce8aa15d05bd57213e6f746f953aafb7ded7a8b/skills/using-superpowers/SKILL.md) 明列使用者與 AGENTS.md 等專案指示優先於 skills，也有廣泛自動啟用要求。可先以本地指示對應限制，但未證明在執行中能限制派工、安裝或發布。
+- [using-git-worktrees](https://github.com/obra/superpowers/blob/2ce8aa15d05bd57213e6f746f953aafb7ded7a8b/skills/using-git-worktrees/SKILL.md) 先辨識既有隔離、優先原生工具；同檔預設遇到 `package.json` 執行 `npm install`，worktree 建立遇權限錯誤則回原目錄繼續。兩產品使用 Bun，jia-jian-log 當前 staging 強制 linked worktree，這些預設需核對／覆蓋；沒有實際違規執行或「無法設定」的結論。
+- [executing-plans](https://github.com/obra/superpowers/blob/2ce8aa15d05bd57213e6f746f953aafb7ded7a8b/skills/executing-plans/SKILL.md) 可在同 session 依任務執行，仍要求最終全分支 reviewer（有 subagent 工具時另派，無時記為自查），並在收尾刪除該 plan 的暫存 workspace。[final-review](https://github.com/obra/superpowers/blob/2ce8aa15d05bd57213e6f746f953aafb7ded7a8b/skills/subagent-driven-development/references/final-review.md) 更明寫 `rm -rf <workspace>`。這裡的 workspace 是 plan 暫存資料夾，不等於整個 Git worktree；仍須處理證據保留、目錄歸屬與刪除授權。本輪沒有執行清理。
+- [恢復指示](https://github.com/obra/superpowers/blob/2ce8aa15d05bd57213e6f746f953aafb7ded7a8b/skills/subagent-driven-development/references/resuming.md) 依 plan 身分與 ledger 完成行續做；未證明獨占認領、舊 owner 失效或程序停止。試用時仍要比對當下工具 schema／模型限制，不能從來源文字推定所有客戶端可用。
 
-| 來源觀察 | 對差距驗證的影響 |
+### BMad：使用 release 既有覆寫，不能把設定入口當解決證據
+
+本版 Build 來源在 [`src/bmm-skills/ship/bmad-build/`](https://github.com/bmad-code-org/BMAD-METHOD/tree/bab9082c3e884e0d72c759bcd1a6d90bcc01be84/src/bmm-skills/ship/bmad-build)，不是其他版本的路徑。[SKILL.md](https://github.com/bmad-code-org/BMAD-METHOD/blob/bab9082c3e884e0d72c759bcd1a6d90bcc01be84/src/bmm-skills/ship/bmad-build/SKILL.md) 以 `uv` renderer 載入 workflow；本輪只讀來源，未跑 renderer。
+
+[`customize.toml`](https://github.com/bmad-code-org/BMAD-METHOD/blob/bab9082c3e884e0d72c759bcd1a6d90bcc01be84/src/bmm-skills/ship/bmad-build/customize.toml) 已提供 `_bmad/custom/bmad-build.toml` 與 `.user.toml` 覆寫：`persistent_facts` 可放 `file:` 指向本地權威，`activation_steps_prepend`／`activation_steps_append` 可放開工要求，`implementation_handoff` 可改實作交接，`review_layers`／`oneshot_review_layers` 可按 id 替換或以空 instruction 停用；另有 `on_complete`／`open_spec`。來源合併規則是字串取代、list 附加、table 逐鍵、table array 依 id。這些是可設定入口，尚未建立設定或驗證優先順序；未將後來 main 的 route／review 自訂欄位誤列為本 release 功能。
+
+[full 實作](https://github.com/bmad-code-org/BMAD-METHOD/blob/bab9082c3e884e0d72c759bcd1a6d90bcc01be84/src/bmm-skills/ship/bmad-build/step-03-implement.md) 預設交給 subagent，要求不 push／不做遠端操作；[review](https://github.com/bmad-code-org/BMAD-METHOD/blob/bab9082c3e884e0d72c759bcd1a6d90bcc01be84/src/bmm-skills/ship/bmad-build/step-04-review.md) 派多個審查層，[present](https://github.com/bmad-code-org/BMAD-METHOD/blob/bab9082c3e884e0d72c759bcd1a6d90bcc01be84/src/bmm-skills/ship/bmad-build/step-05-present.md) 禁止自動 push。[oneshot](https://github.com/bmad-code-org/BMAD-METHOD/blob/bab9082c3e884e0d72c759bcd1a6d90bcc01be84/src/bmm-skills/ship/bmad-build/step-oneshot.md) 雖直接實作，仍要求審查 subagents，除非使用者要求否則不 push。需核對單線授權、review 身分與兩產品的交付節奏；加入 persistent fact 或 on_complete 並不等於已化解步驟衝突。[project-context skill](https://github.com/bmad-code-org/BMAD-METHOD/blob/bab9082c3e884e0d72c759bcd1a6d90bcc01be84/src/bmm-skills/plan/bmad-project-context/SKILL.md) 會提議管理 AGENTS.md 區塊並要求寫入前核准；本輪沒有啟用它。
+
+### Spec Kit：推薦只限官方 Lean，core 與擴充另看
+
+[官方 Lean README](https://github.com/github/spec-kit/blob/9eacc24ffe47eadf035a3af601e4dabfb15b8fde/presets/lean/README.md) 說明它是內建 preset，直接覆寫五個命令，不需另造 Adapter。[specify](https://github.com/github/spec-kit/blob/9eacc24ffe47eadf035a3af601e4dabfb15b8fde/presets/lean/commands/speckit.specify.md) 要求使用者提供 feature 目錄，寫入 `.specify/feature.json` 與 `spec.md`；[plan](https://github.com/github/spec-kit/blob/9eacc24ffe47eadf035a3af601e4dabfb15b8fde/presets/lean/commands/speckit.plan.md)、[tasks](https://github.com/github/spec-kit/blob/9eacc24ffe47eadf035a3af601e4dabfb15b8fde/presets/lean/commands/speckit.tasks.md)、[implement](https://github.com/github/spec-kit/blob/9eacc24ffe47eadf035a3af601e4dabfb15b8fde/presets/lean/commands/speckit.implement.md) 依序讀檔、產生計畫／任務、順序執行，失敗就停並回報。這些精簡命令未要求派工；它們也不是工作區鎖或產品測試／review gate，feature 指標與三份文件要計入維護及接手成本。
+
+[Git extension](https://github.com/github/spec-kit/blob/9eacc24ffe47eadf035a3af601e4dabfb15b8fde/extensions/git/README.md) 將初始化、分支、驗證、auto-commit 放在選用模組；[agent-context extension](https://github.com/github/spec-kit/blob/9eacc24ffe47eadf035a3af601e4dabfb15b8fde/extensions/agent-context/README.md) 明寫 opt-in，`specify init` 不安裝它，不安裝便不修改 AGENTS.md 等 context 檔案。**後續試用提案是先不加這兩項擴充**，沿用產品既有工作區與 Git 規則；本輪沒有進行安裝或設定。[Lean constitution](https://github.com/github/spec-kit/blob/9eacc24ffe47eadf035a3af601e4dabfb15b8fde/presets/lean/commands/speckit.constitution.md) 仍會建立／更新 `.specify/memory/constitution.md`；應在試用中核對它只引用 owning AGENTS.md 與必要脈絡、不產生第二套政策，這是待驗設定要求，非預設保證。
+
+[完整 core plan](https://github.com/github/spec-kit/blob/9eacc24ffe47eadf035a3af601e4dabfb15b8fde/templates/commands/plan.md) 明列派發 research agents，另有較多研究／設計產物及 hook 處理。不能把 Lean 的精簡／順序特性外推到 core、其他 preset、已安裝擴充或未來版本。三套候選均未試跑；成本、規則遵守與收益仍未知。
+
+## 產品規則與現有共用副本：唯讀快照
+
+以下是 2026-11-03 從 owning source 核對的版本，供本次比較使用；實際開工要重查。不是向產品安裝的新規則，也不是這些產品在該版本已跑過測試的宣告。
+
+| 產品／當時基線 | 必須容納的本地規則與來源 |
 | --- | --- |
-| Superpowers [using-superpowers](https://github.com/obra/superpowers/blob/2ce8aa15d05bd57213e6f746f953aafb7ded7a8b/skills/using-superpowers/SKILL.md) 指出使用者與專案指示優先，但也有廣泛的自動 skill 啟用要求 | 測試明確授權範圍能否限制自動工作流程；不能因載入 skill 就推定獲准派工或發布 |
-| [using-git-worktrees](https://github.com/obra/superpowers/blob/2ce8aa15d05bd57213e6f746f953aafb7ded7a8b/skills/using-git-worktrees/SKILL.md) 優先辨識既有隔離與原生工具；同檔包含依檔案類型安裝依賴及 worktree 權限失敗後在原目錄工作的指示 | 核對實際套件管理器、安裝授權，以及本地要求隔離時會不會錯誤退回原 checkout；這是候選衝突，尚未重現 |
-| [subagent-driven-development](https://github.com/obra/superpowers/blob/2ce8aa15d05bd57213e6f746f953aafb7ded7a8b/skills/subagent-driven-development/SKILL.md) 使用每個 plan 的 ledger；[恢復指示](https://github.com/obra/superpowers/blob/2ce8aa15d05bd57213e6f746f953aafb7ded7a8b/skills/subagent-driven-development/references/resuming.md) 依 plan 身分及完成紀錄接續 | 可以優先試既有接手方法；ledger 描述不能證明獨占認領、舊 owner 失效或程序已停止，這些需求仍需分別驗證 |
-| [final-review](https://github.com/obra/superpowers/blob/2ce8aa15d05bd57213e6f746f953aafb7ded7a8b/skills/subagent-driven-development/references/final-review.md) 包含刪除 plan 工作目錄的指示；[分支收尾](https://github.com/obra/superpowers/blob/2ce8aa15d05bd57213e6f746f953aafb7ded7a8b/skills/finishing-a-development-branch/SKILL.md) 則區分 PR 保留與合併後清理 | 保留進度與證據的期限、目錄所有權及刪除授權要映射到本地；測試只可使用可拋棄合成資料，不執行來源中的清理命令 |
-| [Codex 對接指示](https://github.com/obra/superpowers/blob/2ce8aa15d05bd57213e6f746f953aafb7ded7a8b/skills/using-superpowers/references/codex-tools.md) 有工具參數與模型路由假設 | 試用前比對當下工具 schema 與限制；本次環境的完整歷史分支不接受模型覆寫，與該來源文字不同。此為靜態介面差異，未執行派工，也不外推所有 Codex 版本 |
-| Codex [官方 Worktrees](https://learn.chatgpt.com/docs/environments/git-worktrees) 描述預設 detached HEAD、Handoff、ignored 檔案複製及清理快照 | 測試需包含分支命名、只移動本任務修改、未提交／ignored 合成檔案及恢復；不能把 worktree 存在當作所有內容已備份。不要為試用自動複製真實秘密檔案 |
+| Dance Stamp／main `acea4b9d52ad1b7aaa7db2ba1e5b8c070a567b74` | [AGENTS.md](https://github.com/sunpochin/dance-stamp/blob/acea4b9d52ad1b7aaa7db2ba1e5b8c070a567b74/AGENTS.md)：一般 PR → main，單件完成後 commit／push，`bun run check` 加受影響既有測試；共用 checkout 有其他任務時隔離，專用新 clone 可在 feature branch 工作；不自動派平行 Agent。保留媒體成檔、取消與資料保全，review／真機／發布分開。 |
+| jia-jian-log／staging `7b15efdf20d429e95757333458de090e1956f3c0` | [AGENTS.md](https://github.com/sunpochin/jia-jian-log/blob/7b15efdf20d429e95757333458de090e1956f3c0/AGENTS.md)、[Git 流程](https://github.com/sunpochin/jia-jian-log/blob/7b15efdf20d429e95757333458de090e1956f3c0/docs/agents/git-workflow.md)：一般非 Draft PR → staging，Bun unit 含 `--isolate`，任務 commit／檢查點 push，保留 review／merge gates、照護資料與三語限制。當前基線仍要求 linked worktree；#1401 的 clone 替代方案尚未合併生效。 |
 
-以上是閱讀結果與待驗假設，不是漏洞報告、完整安全審查或已確認無法設定的缺陷。未讀完的 hooks、scripts、imports、安裝與更新行為，仍需在獲准安裝前按既有外部工具審查流程檢查。遠端 skill 文字在本輪只作研究資料，未作執行指令。
+兩產品的 [Dance Stamp 固定清單](https://github.com/sunpochin/dance-stamp/blob/acea4b9d52ad1b7aaa7db2ba1e5b8c070a567b74/docs/ai/work-methods-lock.json) 與 [jia-jian-log 固定清單](https://github.com/sunpochin/jia-jian-log/blob/7b15efdf20d429e95757333458de090e1956f3c0/docs/ai/work-methods-lock.json) 文字完全相同，記錄 AWM v0.1.0／commit `938619f5472ff4475f702d51e2a466ab0cc63f60`、33 檔指紋。兩邊的 [採用說明（Dance Stamp）](https://github.com/sunpochin/dance-stamp/blob/acea4b9d52ad1b7aaa7db2ba1e5b8c070a567b74/docs/agents/work-methods.md)／[採用說明（jia-jian-log）](https://github.com/sunpochin/jia-jian-log/blob/7b15efdf20d429e95757333458de090e1956f3c0/docs/agents/work-methods.md) 已要求完整固定副本、共用修正回上游、各自 PR 升版。本輪只比對清單與規則，**沒有重新逐檔比對上游、重跑產品完整性檢查或改動副本**。
+
+## 工作區與 submodule：已有證據及不能外推的部分
+
+像測過一個獨立抽屜能放固定版本的手冊，不代表另一種共用抽屜也能用，更不代表三本新流程手冊已試過。
+
+### jia-jian-log #1401 的精確範圍
+
+2026-11-03 重查 [PR #1401](https://github.com/sunpochin/jia-jian-log/pull/1401) 仍 open、未合併；head `91669d59deab3bdc20dfe03a716cae7a050ccd82`，base staging／merge-base `7b15efdf20d429e95757333458de090e1956f3c0`。該 PR 支援外部確認歸屬的新任務專用 clone，保留 linked worktree、共用目錄與跨路徑防護；不是允許任意現有 clone 自行宣告可寫，也不會自動認領舊工作區。
+
+本輪唯讀查閱 [驗證文件](https://github.com/sunpochin/jia-jian-log/blob/91669d59deab3bdc20dfe03a716cae7a050ccd82/docs/agents/task-workspace-verification.md) 與 [taskCloneSubmodule.test.ts](https://github.com/sunpochin/jia-jian-log/blob/91669d59deab3bdc20dfe03a716cae7a050ccd82/tests/unit/taskCloneSubmodule.test.ts)，**未重跑產品測試**。該單檔僅用暫存合成 repo，驗證獨立 clone 初始化、gitlink 固定 v1、提交升 v2、回父 repo 舊 pin，再偵測未初始化、錯 commit 與髒檔且保留原內容；file transport 僅單次測試開放，global config 也用暫存替代。
+
+- **本機既有結果：** [前棒作者紀錄](https://github.com/sunpochin/jia-jian-log/pull/1401#issuecomment-6591184649) 報告該 head 四份直接相關測試共 97 pass、0 fail。聊天交接另報告上述單檔獨立重跑 1 pass，非本輪重跑或獨立整包複審。本機 macOS／Git 2.54.0（Apple Git-157）／Bun 1.4.2／Node 26.8.1，不能冒充 repo 指定 Bun 1.4.4／Node 24.x。
+- **已重新核對的 CI：** [app-ci 41545966344](https://github.com/sunpochin/jia-jian-log/actions/runs/41545966344) success，含指定 runtime、ESLint、完整 unit／coverage；其 checkout 為 PR merge ref，是該 head 與 staging 基線的整合檢查，與本機直接 head 結果分開。[security-ci 41545966249](https://github.com/sunpochin/jia-jian-log/actions/runs/41545966249) success，Gitleaks／Semgrep 成功，OSV 因原條件 skipped，不算已跑。
+- **審查仍有缺項：** [bot 摘要](https://github.com/sunpochin/jia-jian-log/pull/1401#issuecomment-6591165926) 對完整 head 明列 completed／no findings；但重查 `codex-review/current` 仍 pending。[gate run 41545985170](https://github.com/sunpochin/jia-jian-log/actions/runs/41545985170) 的 job 已 success，這表示處理流程完成，不能代替該 commit status。作者交接記錄了摘要格式／事件的採計差異，本輪沒有重驗 gate 根因。不能宣告可合併；本輪沒有改 gate、手動寫成功、豁免或重複請審。
+- **未驗證：** linked worktree＋submodule、任意 clone 的桌面 app 附加、舊 session 自動重新載入、Mission Control 派工／原生 canary、真實遠端來源可取得性。guard 是可信 host 設定下的日常防誤操作，非任意 shell／MCP 的完整 OS 隔離。這些結果不是三套候選的執行證據，也不是產品 submodule 遷移。
+
+### 是否改用 submodule：先保留固定副本
+
+[Git 官方](https://git-scm.com/docs/gitsubmodules) 說明 gitlink 記錄父 repo 期待的子模組 commit；原生 pin 可省去手動維護逐檔版本清單。[submodule 文件](https://git-scm.com/docs/git-submodule) 仍要求初始化／取得缺少 commit；[`git-worktree` 的 BUGS](https://git-scm.com/docs/git-worktree#_bugs) 仍明列 submodule 支援不完整。因此獨立 clone 測試通過不能外推 linked worktree＋submodule；放寬工作區規則只供另一種 clone 路徑，不會修好該組合。
+
+| 可減少的工作 | 採用前仍要處理 |
+| --- | --- |
+| Git 直接保存整個上游 commit，升降版有 gitlink diff；可減少逐檔版本清單維護 | 新 clone／CI 的初始化、上游來源與固定 commit 可取得性、來源授權、離線／封裝內容與技能入口。 |
+| 父 repo 可顯示子模組 commit 差異 | 同 commit 不等於乾淨；合成測試中 `submodule status` 的空白仍可伴隨髒檔。仍須檢查父／子 status、來源與未提交工作，不靠強制清理。 |
+| 可改以 Git pin 表達版本完整性 | 兩產品現有 33 檔完整性檢查、CI checkout、公開內容掃描及發行包仍須調整與重驗，不能直接刪掉既有防線。 |
+
+**目前不遷移兩產品。** 先確認選型後 AWM 還需保留多少共用內容，再決定分發方式；避免為固定版本另造管理系統。若未來仍有實際收益，另經授權提出最小遷移與回復計畫。本輪不改產品完成條件、不升版、不關票。
 
 ## 差距驗證順序與通過證據
 
-1. **先選一套待試流程。** 比較如何容納現有 AGENTS.md、測試與 PR 規則，核對設定／範本／擴充方式；記錄選它而非其他候選的理由、實際版本與現有基準。候選試用不等於正式採用，也不因本文件而取得安裝或派工授權。
+1. **審閱 Lean 優先試用提案。** 根據上述固定來源比較，核對如何容納現有 AGENTS.md、測試與 PR 規則及設定／範本／擴充方式；另定實際版本、單項任務、工時／費用預算、停止條件與現有基準。候選試用不等於正式採用，也不因本文件而取得安裝或派工授權。
 2. **兩產品各試一項小任務。** 各自取得授權，選無競爭 PR、可獨立驗收且有真實維護價值的一項；先單線，使用現有測試。先做設定，記錄真正做不到、衝突或成本過高的情況；兩邊可接受不同決策。必要的危險／失敗情境先在可拋棄合成資料上驗證，不把自建測試框架當前提。
 3. **依結果決策。** 能設定就設定；適合上游改善的問題先整理可重現證據。只有反覆出現且確實無法解決的缺口，才另提少量自建。結果可為直接採用、只需設定、自建少量補充或維持現狀；不要求 AWM 必須增加內容或角色。
 
-下列情境目前**全部未執行**，是依選定工具與任務風險取用的驗證清單，不是另造完整流水線的規格；不適用項要寫理由。每次紀錄結果須區分：工具直接處理、經設定處理、既有人工 gate 處理、無法處理或未驗證；人工核對不能報成工具自動拒絕。
+下列情境**尚未在三套候選中執行**，與 #1401 的合成工作區證據分開。這是依選定工具與任務風險取用的清單，不是另造完整流水線的規格；不適用項要寫理由。每次紀錄結果須區分：工具直接處理、經設定處理、既有人工 gate 處理、無法處理或未驗證；人工核對不能報成工具自動拒絕。
 
 | 情境 | 預期結果與需留證據 |
 | --- | --- |

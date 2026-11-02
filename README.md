@@ -32,7 +32,7 @@ Read [adoption and updates](docs/ADOPTION.md), [design decisions](TECHNICAL.md),
 
 ## 後續選型研究
 
-先評估現成流程如何容納既有專案規則，再以小任務驗證採用可行性；結果可以是直接採用、只需設定、少量補充或維持現狀，並不要求新增 AWM 流程或 Adapter。見 [現成流程比較與採用驗證計畫](docs/TOOL_EVALUATION.md)。目前只有文件與來源核對，尚未安裝、試用或選定新方案；既有五個 skills 不受影響。
+固定版本比較後，建議優先小規模試用 **Spec Kit v1.2.6 的官方 Lean preset**，先保留各產品的工作區、測試與 PR 流程。見 [三套流程比較、試用建議與工作區驗證限制](docs/TOOL_EVALUATION.md)。這是來源閱讀後的試用順序，尚未安裝、試跑或正式採用；獨立 clone＋submodule 的合成證據不代表候選相容。結果仍可為直接採用、只需設定、少量補充或維持現狀，不要求新增 AWM 流程或 Adapter；既有五個 skills 不受影響。
 
 ## 維護與驗證 / Maintenance
 
