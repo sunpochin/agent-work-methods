@@ -34,3 +34,7 @@ Point the agent to actual project instructions, commands, data boundaries, failu
 Compare the adopted commit with the candidate. Review instructions, references, licenses and any new executable content; this first version has no executable skill helpers. Preserve local adaptations and resolve conflicts explicitly. Update the complete selected skill and its source record together through the consuming project's workflow.
 
 Publication does not install or update either source product. Each can adopt a reviewed version separately.
+
+## Evaluate additional workflows separately
+
+For proposed refactoring workflows, use the [existing-workflow comparison and trial plan](TOOL_EVALUATION.md). Inspect the candidate's own configuration, templates and extensions against existing project rules before proposing any new AWM workflow or adapter. Record the installed App/CLI/plugin version separately from a source commit inspected on GitHub. Keeping the current workflow is a valid outcome; this research selects no dependency and requires no new shared layer. Product trials and changes to global configuration require their own scope and authorization.
