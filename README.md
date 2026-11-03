@@ -32,7 +32,7 @@ Read [adoption and updates](docs/ADOPTION.md), [design decisions](TECHNICAL.md),
 
 ## 後續選型研究
 
-固定版本比較後，建議優先小規模試用 **Spec Kit v1.2.6 的官方 Lean preset**，先保留各產品的工作區、測試與 PR 流程。見 [三套流程比較、試用建議與工作區驗證限制](docs/TOOL_EVALUATION.md)。這是來源閱讀後的試用順序，尚未安裝、試跑或正式採用；獨立 clone＋submodule 的合成證據不代表候選相容。結果仍可為直接採用、只需設定、少量補充或維持現狀，不要求新增 AWM 流程或 Adapter；既有五個 skills 不受影響。
+固定版本比較後，先以 **Spec Kit v1.2.6 的官方 Lean preset** 做了 Dance Stamp 小任務試用。局部設定與顯式載入可用，但額外文件成本高，尚無更快或更省的證據；這類小修正建議維持原生流程。見 [比較、試用結果與限制](docs/TOOL_EVALUATION.md)。未正式擴大採用，jia-jian-log 尚未試用；獨立 clone＋submodule 的合成證據不代表候選相容。不新增 AWM 流程或 Adapter、不遷移產品副本；既有五個 skills 不受影響。
 
 ## 維護與驗證 / Maintenance
 
