@@ -1,4 +1,4 @@
-<!-- 檔案用途：讓第一次使用的人能選取與採用共用方法。所在層：公開入口。主要關聯：docs/ADOPTION.md、TECHNICAL.md、skills/。 -->
+<!-- 檔案用途：讓第一次使用的人能選取與採用共用方法。所在層：公開入口。主要關聯：docs/ADOPTION.md、docs/AI_WORKFLOWS.md、TECHNICAL.md、skills/。 -->
 # Agent Work Methods
 
 把接手專案、找 bug、審查和檢查介面的方法，裝成可以各自取用的小工具箱。選一個需要的 skill，連同整個資料夾放進你的工具支援的位置；它先看你的專案規則，再協助完成工作。
@@ -28,7 +28,11 @@ Choose a reviewed revision and copy one complete directory from `skills/` to a l
 
 These skills supply methods, not project authority. They do not select your framework, package manager, language, branch model, reviewer vendor, push policy, or release permissions. Instructions are in English; guides also introduce their purpose in plain Traditional Chinese.
 
-Read [adoption and updates](docs/ADOPTION.md), [design decisions](TECHNICAL.md), and [validation and limits](docs/VALIDATION.md). Format follows the [Agent Skills specification](https://agentskills.io/specification); structural compatibility does not establish integration with every client.
+Read [adoption and updates](docs/ADOPTION.md), [design decisions](TECHNICAL.md), [AI workflows and frameworks](docs/AI_WORKFLOWS.md), and [validation and limits](docs/VALIDATION.md). Format follows the [Agent Skills specification](https://agentskills.io/specification); structural compatibility does not establish integration with every client.
+
+## AI 工作流程、Skills 與框架紀錄
+
+本專案體系所採用、評估與借鑑之各類 AI 工作流程、Skills 與框架（包含 AWM 五大 Skills、GitHub Spec Kit、pstack、gstack、gbrain、Superpowers、BMad Method 等），已統整於 [AI 工作流程與框架清單](docs/AI_WORKFLOWS.md)，提供架構總覽、評估結論與任務選型指引。
 
 ## 後續選型研究
 

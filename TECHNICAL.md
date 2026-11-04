@@ -1,4 +1,4 @@
-<!-- 檔案用途：先解釋使用方法，再記錄邊界與取捨。所在層：設計文件。主要關聯：README.md、docs/ADOPTION.md、docs/VALIDATION.md。 -->
+<!-- 檔案用途：先解釋使用方法，再記錄邊界與取捨。所在層：設計文件。主要關聯：README.md、docs/ADOPTION.md、docs/AI_WORKFLOWS.md、docs/VALIDATION.md。 -->
 # 設計與取捨 / Design decisions
 
 ## 怎麼用、為什麼有效
@@ -43,3 +43,15 @@ The later Dance Stamp #249 / PR #250 pilot used Spec Kit v1.2.6 with official Le
 The comparison separately records jia-jian-log PR #1401 at its exact head/base: confirmed task-clone support and synthetic independent-clone/submodule tests remain in an open, unmerged product PR. CI success and a completed bot summary coexist with a pending review status. This does not change staging policy or establish candidate execution, linked-worktree/submodule support, arbitrary desktop clone attachment or Mission Control acceptance. The two products' v0.1.0 lock manifests match; their 33 upstream files were not rehashed in this pass.
 
 Submodules can replace a manual per-file version manifest with a Git commit pin, but initialization, source/commit availability, dirty-tree detection, integrity checks, CI and public scanning still need product-specific review. Relaxing workspace policy supplies a clone alternative; it does not fix linked worktrees with submodules. Keep pinned copies for now and decide how much shared AWM content is useful before changing distribution. Use only necessary synthetic cases before an authorized product trial; no new test framework is a prerequisite. Package checks establish documentation/bundle structure, not independent behavioral review or adoption benefits.
+
+## AI workflows, skills, and framework inventory
+
+<!-- 說明為何建立專門清單：記錄專案生態系所用之 AI 工作流與框架（Spec Kit、pstack、gstack、gbrain、AWM 等），釐清選型邊界與借鑑要點，避免重蹈過度工程化覆轍。 -->
+For a consolidated inventory of workflows, skills, and frameworks used, piloted, or referenced across this collection and adopting products (including GitHub Spec Kit, pstack, gstack, gbrain, Superpowers, BMad Method, Serena, and our two-tier agent hierarchy), see [AI Workflows & Frameworks](docs/AI_WORKFLOWS.md).
+
+### Design decisions and rejected alternatives
+
+- **Verification-First and Thin Adapters over Heavy Runtimes**: We rejected incorporating heavy autonomous multi-agent orchestration frameworks (such as BMad or Superpowers' default runtime) into the shared core. These introduce unwanted assumptions (e.g., hardcoded `npm install` or destructive `rm -rf` operations) that violate our project safety constitution and package manager baselines. Instead, we keep the core AWM skills purely text-based and zero-dependency, adhering to the Agent Skills specification.
+- **Pragmatic Borrowing from pstack**: Rather than taking on pstack as an all-or-nothing external plugin dependency, we adopt its core engineering tenets—specifically "Go deep first, then fast", the Laziness Protocol (minimal blast radius), and rigorous verification against real running environments (Prove It Works). This directly informs our `awm-debugging` and `awm-review-evidence` methods.
+- **Borrowing Role Review from gstack and Graph Navigation from gbrain**: Garry Tan's `gstack` models an end-to-end engineering team (e.g. founder/CEO reviews with `/plan-ceo-review`, security reviews with `/cso`), while `gbrain` models persistent cross-session memory and call graph traversal (`code-callers`). We embrace these conceptual checks in our review and debugging skills, but reject requiring external database daemons (Postgres/PGLite) or a heavy suite of 20+ custom slash commands for core operations. Instead, we use Git receipts and Markdown records (`TECHNICAL.md`) as our zero-infrastructure persistent memory.
+- **Spec Kit Lean Trial Conclusions**: As confirmed in Dance Stamp #249 / PR #250, structured spec-driven development (`spec.md` -> `plan.md` -> `tasks.md`) has high documentation overhead for small patches without measurable speed or token savings. We reserve formal spec-driven workflows for major multi-component features or cross-team interfaces, keeping native lightweight workflows for everyday defect resolution.
