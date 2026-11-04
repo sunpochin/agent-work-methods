@@ -22,6 +22,8 @@
 | **自研通用技能庫 (AWM)** | `agent-work-methods` (5 Skills) | 遵循 Agent Skills Specification；純文字 Markdown、自足無外部執行期依賴 | **正式採用 (v0.1.0)** | 接手專案、問題重現、客觀審查、介面驗收與安全性檢查 |
 | **規格驅動開發 (Spec-Driven)** | **GitHub Spec Kit** (`spec-kit`) | 依序產出 `spec.md` → `plan.md` → `tasks.md`；官方 Lean preset | **已完成試用 (Dance Stamp #249)** | 適合大型跨團隊需求；小型任務額外文件開銷過大，建議維持原生流程 |
 | **工程 Playbook 與反 Slop** | **pstack** (Lauren Tan / poteto) | `/poteto-mode` 路由、20+ Playbooks、24 項工程原則、真實環境驗證 | **核心參考典範 / 借鑑原則** | 借鑑其 "Go Deep First, Then Fast"、Laziness Protocol 與真實驗證精神 |
+| **虛擬團隊流程體系** | **gstack** (Garry Tan / YC) | 7 大工程生命週期（Think→Plan→Build→Review→Test→Ship→Reflect）、20+ 角色指令 | **借鑑參考 / 流程典範** | 模擬創辦人、主管、資安長等角色審查；適合複雜端到端需求 |
+| **持久記憶與調用圖譜** | **gbrain** (Garry Tan / YC) | 跨 Session 持久記憶、代碼符號調用鏈 (`code-callers`)、MCP 整合、Dream Cycle | **借鑑參考 / 記憶典範** | 解決 Agent 失憶問題；本專案以 Git/文件作記憶，借鑑其調用圖導航概念 |
 | **子 Agent 驅動規劃** | **Superpowers** (obra) | Subagent-driven、Git Worktree 隔離、Plan 循序執行 | **靜態評估完畢 / 暫緩優先試用** | 預設包含 `npm install` 與 `rm -rf`，與本專案 Bun 及命令安全政策衝突 |
 | **多角色全週期體系** | **BMad Method** (BMAD-METHOD) | BMM Skills (`bmad-build`)、多角色分工 (PM/Arch/Dev/QA)、`uv` 渲染 | **靜態評估完畢 / 暫緩優先試用** | 框架過於龐重、配置與派工成本高於帶來的效益 |
 | **雙層 Agent 協作體系** | **Project Constitution** | 主刀醫師 (Claude Code) + 實習探路員 (Antigravity) | **核心專案憲法實施中** | 生產代碼與架構由主刀負責；UI 原型/探路/驗證由實習生負責 |
@@ -82,7 +84,32 @@
 
 ---
 
-### 3.4 Superpowers & BMad Method (評估與借鑑)
+### 3.4 gstack 與 gbrain (Garry Tan / Y Combinator)
+
+- **來源背景**：由 Y Combinator (YC) 總裁兼 CEO Garry Tan 所發起並開源的 AI Agent 開發體系與持久化記憶體生態（主要深度適配 Claude Code，亦支援 Cursor 與 Codex）。
+- **核心架構與要素**：
+  1. **gstack（虛擬軟體工程團隊流程）**：
+     - **完整生命週期分期**：將任務嚴格劃分為 7 大階段：`Think`（思考構想）→ `Plan`（規劃架構）→ `Build`（編寫代碼）→ `Review`（代碼審查）→ `Test`（驗證測試）→ `Ship`（交付上線）→ `Reflect`（反思總結）。
+     - **角色化指令 (Role-Specialized Commands, 20+)**：
+       - `/plan-ceo-review`：模擬科技公司創辦人/CEO 視角，在動手前強力質疑需求痛點、商業價值與技術假設（審查動機與前提）。
+       - `/plan-eng-review`：工程主管模式，核查技術選型、相容性與架構邊界。
+       - `/cso`：資安長模式，依據 OWASP Top 10 與 STRIDE 框架進行自動化威脅建模審查。
+       - `/document-release` / `/document-generate`：遵循 Diataxis 技術文件四元框架（Tutorials, How-to, Reference, Explanation）自動維護文件。
+       - `/retro` / `/learn`：迭代結束時的覆盤總結，將經驗沈澱入知識庫。
+  2. **gbrain（跨 Session 記憶體與代碼調用圖譜）**：
+     - **解決 Agent 失憶問題 (Agent Amnesia)**：傳統 Agent 每開新會話便丟失上下文與踩坑教訓；`gbrain` 透過本機資料庫（PGLite / SQLite）或遠端 PostgreSQL（Supabase）持久儲存歷史決策與回顧紀錄。
+     - **符號級調用圖譜 (Call Graph Navigation)**：提供符號級代碼索引與導航能力（`code-def`, `code-refs`, `code-callers`, `code-callees`），使 Agent 能沿著調用鏈精準溯源，而非盲目依賴全文檢索（`grep`）。
+     - **持續學習與反思迴路 (Dream Cycle)**：透過 MCP (Model Context Protocol) 伺服器整合，讓 Agent 在背景整理學習記憶，隨著開發時間累積越來越了解代碼庫。
+- **與本專案（AWM）的比較與借鑑取捨**：
+  - **理念共通**：皆追求「避免 AI 盲改」、「強制規格與審查」、「重視安全性（如 CSO 審查與我們的 `awm-skill-safety`、`destructive-guard.ts` 意圖相同）」。
+  - **架構取捨**：
+    - `gstack` + `gbrain` 是高度整合的完整生態系，需要配置專屬 MCP 伺服器、本機或雲端資料庫儲存，並導入超過 20 個特定 slash commands，偏向「重裝備」方案。
+    - `agent-work-methods` (AWM) 堅持「極簡純文字、零外部相依、單一資料夾自足」路線。我們直接以 Git 歷史、Commit 證據與 Markdown 檔案（如 `TECHNICAL.md`）作為記憶載體，省去維護額外資料庫守護行程（Daemon）的成本。
+    - **借鑑結論**：我們將 `gstack` 的「CEO 需求反思」、「CSO 資安威脅建模」以及 `gbrain` 的「沿著調用鏈排查根因」精華吸收融入專案審查與 `awm-debugging` 方法中，但不直接綁定其重型資料庫與專用 CLI。
+
+---
+
+### 3.5 Superpowers & BMad Method (評估與借鑑)
 
 - **Superpowers (obra, v7.0.1)**：
   - 核心特點：子 Agent 驅動規劃、利用 Git Worktree 進行空間隔離 (`using-git-worktrees`)、Plan 循序執行 (`executing-plans`)。
@@ -93,7 +120,7 @@
 
 ---
 
-### 3.5 雙層 Agent 協作體系 (Two-Tier Agent Constitution)
+### 3.6 雙層 Agent 協作體系 (Two-Tier Agent Constitution)
 
 本專案體系規範了清晰的雙層 Agent 職責分工與最高憲法原則：
 

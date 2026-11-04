@@ -32,7 +32,7 @@ Read [adoption and updates](docs/ADOPTION.md), [design decisions](TECHNICAL.md),
 
 ## AI 工作流程、Skills 與框架紀錄
 
-本專案體系所採用、評估與借鑑之各類 AI 工作流程、Skills 與框架（包含 AWM 五大 Skills、GitHub Spec Kit、pstack、Superpowers、BMad Method 等），已統整於 [AI 工作流程與框架清單](docs/AI_WORKFLOWS.md)，提供架構總覽、評估結論與任務選型指引。
+本專案體系所採用、評估與借鑑之各類 AI 工作流程、Skills 與框架（包含 AWM 五大 Skills、GitHub Spec Kit、pstack、gstack、gbrain、Superpowers、BMad Method 等），已統整於 [AI 工作流程與框架清單](docs/AI_WORKFLOWS.md)，提供架構總覽、評估結論與任務選型指引。
 
 ## 後續選型研究
 
